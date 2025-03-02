@@ -54,14 +54,10 @@ object Main {
       println(s"$palabra -> $count")
     }
 
-    // Ejercicio 5: Ingreso total por producto
-    println("Ejercicio 5: Ingreso total por producto")
-    val ventasData = Seq(
-      (1, "A", 2, 10.0),
-      (2, "B", 3, 15.0),
-      (3, "A", 1, 10.0)
-    ).toDF("id_venta", "id_producto", "cantidad", "precio_unitario")
-    val resultEj5 = examen.ejercicio5(ventasData)(spark)
+    // Ejercicio 5: Ingreso total por producto desde CSV
+    println("Ejercicio 5: Ingreso total por producto desde CSV")
+    // Se asume que el archivo "ventas.csv" se encuentra en la ruta correcta.
+    val resultEj5 = examen.ejercicio5(spark, "ventas.csv")
     resultEj5.show()
 
     spark.stop()
