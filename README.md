@@ -27,7 +27,7 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-sql" % "3.2.0",
   "org.scalatest" %% "scalatest" % "3.2.10" % Test
 )
-
+```
 # Examen de Scala con Apache Spark
 
 Este repositorio contiene la implementación de una serie de ejercicios en Scala utilizando Apache Spark. Cada ejercicio aborda un concepto clave del procesamiento de datos con Spark, incluyendo DataFrames, UDFs, joins, RDDs y procesamiento de archivos CSV.
