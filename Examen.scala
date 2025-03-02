@@ -11,7 +11,6 @@ object examen {
     * Pregunta: Crea un DataFrame a partir de una secuencia de tuplas que contenga información sobre
     *           estudiantes (nombre, edad, calificación).
     *           Realiza las siguientes operaciones:
-    *
     *           - Muestra el esquema del DataFrame.
     *           - Filtra los estudiantes con una calificación mayor a 8.
     *           - Selecciona los nombres de los estudiantes y ordénalos por calificación de forma descendente.
@@ -20,10 +19,9 @@ object examen {
     // Muestra el esquema (side-effect)
     estudiantes.printSchema()
     // Filtra, ordena y selecciona el nombre
-    val df = estudiantes.filter(col("calificacion") > 8)
+    estudiantes.filter(col("calificacion") > 8)
       .orderBy(desc("calificacion"))
       .select("nombre")
-    df
   }
 
   /** Ejercicio 2: UDF (User Defined Function)
@@ -64,8 +62,15 @@ object examen {
     * Pregunta: Carga un archivo CSV que contenga información sobre
     *           ventas (id_venta, id_producto, cantidad, precio_unitario)
     *           y calcula el ingreso total (cantidad * precio_unitario) por producto.
+    *
+    * Se asume que el archivo se llama "ventas.csv" o que se indica su ruta.
     */
-  def ejercicio5(ventas: DataFrame)(spark: SparkSession): DataFrame = {
+  def ejercicio5(spark: SparkSession, filePath: String = "ventas.csv"): DataFrame = {
+    // Cargar el archivo CSV usando la ruta proporcionada
+    val ventas = spark.read
+      .option("header", "true")
+      .option("inferSchema", "true")
+      .csv(filePath)
     // Calcular el ingreso por fila y luego agrupar por producto para sumar
     ventas.withColumn("ingreso", col("cantidad") * col("precio_unitario"))
       .groupBy("id_producto")
